@@ -65,13 +65,13 @@
             alert('Failed: ' + args.get_stackTrace());  
         }
 
-        $http({headers: { "Accept": "application/json; odata=verbose" }, method: 'GET', url:_spPageContextInfo.webServerRelativeUrl + "_api/Web/Lists/GetByTitle('systems')/items?$select=Title,ID"}) 
+        $http({headers: { "Accept": "application/json; odata=verbose" }, method: 'GET', url: _spPageContextInfo.webAbsoluteUrl + "/_api/Web/Lists/GetByTitle('systems')/items?$select=Title,ID"}) 
             .success(function(data) {
                     $scope.systems = data.d.results;
                     });
 
         $scope.getSystemRole = function(id){
-            $urlRequest = _spPageContextInfo.webServerRelativeUrl + "_api/Web/Lists/GetByTitle('roles')/items?$select=ID,Title,SystemTitle/ID&$expand=SystemTitle/ID&$filter=SystemTitle/ID eq " + id;
+            $urlRequest = _spPageContextInfo.webAbsoluteUrl + "/_api/Web/Lists/GetByTitle('roles')/items?$select=ID,Title,SystemTitle/ID&$expand=SystemTitle/ID&$filter=SystemTitle/ID eq " + id;
             $http({headers: { "Accept": "application/json; odata=verbose" }, method: 'GET', url: $urlRequest}) 
                 .success(function(data) {
                         $scope.roles = data.d.results;
