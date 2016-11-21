@@ -1,4 +1,4 @@
-<link data-require="bootstrap-css@*" data-semver="3.0.0" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+<link data-require="bootstrap-css@*" data-semver="3.0.0" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" /> 
 <h2>Add a new request for access:</h2>  
 <br />  
 <div>  
@@ -65,13 +65,13 @@
             alert('Failed: ' + args.get_stackTrace());  
         }
 
-        $http({headers: { "Accept": "application/json; odata=verbose" }, method: 'GET', url:"http://sp13-demo-wfe:8888/sites/pnp/_api/Web/Lists/GetByTitle('systems')/items?$select=Title,ID"}) 
+        $http({headers: { "Accept": "application/json; odata=verbose" }, method: 'GET', url:_spPageContextInfo.webServerRelativeUrl + "_api/Web/Lists/GetByTitle('systems')/items?$select=Title,ID"}) 
             .success(function(data) {
                     $scope.systems = data.d.results;
                     });
 
         $scope.getSystemRole = function(id){
-            $urlRequest = "http://sp13-demo-wfe:8888/sites/pnp/_api/Web/Lists/GetByTitle('roles')/items?$select=ID,Title,SystemTitle/ID&$expand=SystemTitle/ID&$filter=SystemTitle/ID eq " + id;
+            $urlRequest = _spPageContextInfo.webServerRelativeUrl + "_api/Web/Lists/GetByTitle('roles')/items?$select=ID,Title,SystemTitle/ID&$expand=SystemTitle/ID&$filter=SystemTitle/ID eq " + id;
             $http({headers: { "Accept": "application/json; odata=verbose" }, method: 'GET', url: $urlRequest}) 
                 .success(function(data) {
                         $scope.roles = data.d.results;
