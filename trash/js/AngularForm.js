@@ -1,8 +1,8 @@
-const contactListName = 'systems';
-const rolesListName = 'roles';
+var contactListName = 'systems';
+var rolesListName = 'roles';
 var myApp = angular.module('myApp', []);
 myApp.service('mySharePointService', function ($q, $http) {
-    this.getSystems = function () {
+    this.getSystems = function ($scope) {
         var deferred = $q.defer();
         var ctx = new SP.ClientContext.get_current();
         var web = ctx.get_web();
@@ -90,13 +90,11 @@ myApp.controller('MyCtl', function ($scope, mySharePointService) {
             console.log("Error: " + errorMsg);
         });
     };
-    
     SP.SOD.executeOrDelayUntilScriptLoaded(GTSystems, "SP.js");
     function GTSystems() {
         $scope.getSystems($scope, mySharePointService);
     }
 });
-
 angular.element(document).ready(function () {
     angular.bootstrap(document, ['myApp']);
 });
